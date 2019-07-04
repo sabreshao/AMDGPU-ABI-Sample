@@ -41,6 +41,7 @@
 ################################################################################
 
 set(CLANG "/opt/rocm/opencl/bin/x86_64/clang")
+set(CLANG-OCL "/opt/rocm/bin/clang-ocl")
 set(OPENCL_BC "/opt/rocm/opencl/lib/x86_64/bitcode")
 set(OPENCL_HDR "/opt/rocm/opencl/include")
 
@@ -94,7 +95,7 @@ macro(ocl_example f)
   add_custom_command(
     OUTPUT ${f}.so
     COMMAND 
-    ${CLANG} -cl-std=CL1.2 -include ${OPENCL_HDR}/opencl-c.h -Xclang -mlink-bitcode-file -Xclang ${OPENCL_BC}/opencl.amdgcn.bc -Xclang -mlink-bitcode-file -Xclang ${OPENCL_BC}/ockl.amdgcn.bc -mllvm -amdgpu-early-inline-all -target amdgcn-amd-amdhsa-opencl -mcpu=gfx906 -o ${f}.so ${CMAKE_CURRENT_SOURCE_DIR}/${f}.cl
+    gfxip=906 ${CLANG-OCL} -o ${f}.so ${CMAKE_CURRENT_SOURCE_DIR}/${f}.cl
     DEPENDS ${f}.cl
     COMMENT "Building ${f}.cl to ${f}.so"
   )
@@ -106,3 +107,4 @@ add_subdirectory(asmv2)
 add_subdirectory(asmv3)
 add_subdirectory(ocl)
 add_subdirectory(hiploader)
+add_subdirectory(oclloader)
