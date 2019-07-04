@@ -95,7 +95,7 @@ macro(ocl_example f)
   add_custom_command(
     OUTPUT ${f}.so
     COMMAND 
-    gfxip=906 ${CLANG-OCL} -o ${f}.so ${CMAKE_CURRENT_SOURCE_DIR}/${f}.cl
+    ${CLANG-OCL} -mcpu=gfx906 -o ${f}.so ${CMAKE_CURRENT_SOURCE_DIR}/${f}.cl
     DEPENDS ${f}.cl
     COMMENT "Building ${f}.cl to ${f}.so"
   )
