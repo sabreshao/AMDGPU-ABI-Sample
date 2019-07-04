@@ -34,7 +34,10 @@ int main( int argc, char* argv[] )
       buffer = (unsigned char*)malloc(file_size);
       file.read((char*)buffer, file_size);
       program = clCreateProgramWithBinary(context, 1, &device_id, &file_size, &buffer, &berr, &err);
-      std::cout << "program err " << err << " PASSED!\n";
+      std::cout << "create err " << err << " PASSED!\n";
+
+      err = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
+      std::cout << "build err " << err << " PASSED!\n";
 
       kernel  = clCreateKernel(program, argv[2], &err);
       
