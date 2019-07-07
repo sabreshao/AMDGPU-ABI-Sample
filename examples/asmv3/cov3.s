@@ -1,5 +1,6 @@
 
 .text
+.amdgcn_target "amdgcn-amd-amdhsa--gfx906"
 .globl hello_world
 .p2align 8
 .type hello_world,@function

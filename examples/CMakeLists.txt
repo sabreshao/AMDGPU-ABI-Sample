@@ -50,7 +50,7 @@ macro(asm_assemble f)
 add_custom_command(
   OUTPUT ${f}.o
   COMMAND
-    ${CLANG} -x assembler -mcode-object-v3  -target amdgcn--amdhsa -mcpu=gfx906 -c -o ${f}.o ${CMAKE_CURRENT_SOURCE_DIR}/${f}.s
+    ${CLANG} -x assembler -mcode-object-v3  -target amdgcn-amd-amdhsa -mcpu=gfx906 -c -o ${f}.o ${CMAKE_CURRENT_SOURCE_DIR}/${f}.s
   DEPENDS ${f}.s
   COMMENT "Assembling ${f}.s to ${f}.o"
 )
@@ -102,6 +102,7 @@ macro(ocl_example f)
   add_custom_target(${f}_co ALL DEPENDS ${f}.so)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${f}.so DESTINATION bin COMPONENT examples)
 endmacro(ocl_example)
+#${CLANG} -cl-std=CL1.2 -include ${OPENCL_HDR}/opencl-c.h -Xclang -mlink-bitcode-file -Xclang ${OPENCL_BC}/opencl.amdgcn.bc -Xclang -mlink-bitcode-file -Xclang ${OPENCL_BC}/ockl.amdgcn.bc -mllvm -amdgpu-early-inline-all -target amdgcn-amd-amdhsa-opencl -mcpu=gfx906 -mcode-object-v3 -o ${f}.so ${CMAKE_CURRENT_SOURCE_DIR}/${f}.cl
 
 add_subdirectory(asmv2)
 add_subdirectory(asmv3)
