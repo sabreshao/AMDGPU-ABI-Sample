@@ -40,9 +40,9 @@
 ##
 ################################################################################
 
-set(CLANG "/opt/rocm/opencl/bin/x86_64/clang")
+set(CLANG "/opt/rocm/llvm/bin/clang")
 set(CLANG-OCL "/opt/rocm/bin/clang-ocl")
-set(OPENCL_BC "/opt/rocm/opencl/lib/x86_64/bitcode")
+set(OPENCL_BC "/opt/rocm/llvm/lib/x86_64/bitcode")
 set(OPENCL_HDR "/opt/rocm/opencl/include")
 
 
